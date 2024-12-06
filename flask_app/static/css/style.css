@@ -1,0 +1,19 @@
+.sub-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+#container_view{
+    background-color:rgb(219, 218, 218);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 0;
+    border: 1px solid #000000;;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #838383;
+}

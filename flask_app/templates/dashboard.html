@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="sub-container">
+            <div>
+                <h1>Bienvenido, {{ user['first_name'] }}!</h1>
+            </div>
+            <div>
+                <a href="{{ url_for('create_event') }}" class="btn btn-primary">Crear Nuevo Evento</a>
+                <a href="{{ url_for('logout') }}" class="btn btn-secondary">Cerrar Sesión</a>    
+            </div>
+        </div>
+
+        <h2>Eventos</h2>
+        <table class="table table-striped mt-3">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Evento</th>
+                    <th>Ubicación</th>
+                    <th>Fecha</th>
+                    <th>Publicado Por</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in events %}
+                <tr>
+                    <td>{{ event.name }}</td>
+                    <td>{{ event.location }}</td>
+                    <td>{{ event.date }}</td>
+                    <td>{{ event.first_name }} {{ event.last_name }}</td>
+                    <td>
+                        <a href="{{ url_for('view_event', event_id=event.id) }}" class="btn btn-info btn-sm">Ver</a>
+                        {% if event.user_id == user.id %}
+                            <a href="{{ url_for('edit_event', event_id=event.id) }}" class="btn btn-warning btn-sm">Editar</a>
+                            <a href="{{ url_for('delete_event', event_id=event.id) }}" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este evento?');">Eliminar</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
